@@ -56,11 +56,30 @@ class Friend extends React.Component {
         
             // this.setState({since:parseInt(response.data.since)+1})
                      this.getAllFriends()
+                     window.location.reload(false);
                     },error=>{
                         console.log(error.error)
                     })
                 }
 
+                subSinceWithId=(id)=>{
+                    console.log('sub since for received id: ' + id);
+                    axios.get('http://localhost:3000/allfriends/'+id)
+                    .then(response=>{
+                        console.log(parseInt(response.data.since)+1)
+                        axios.patch('http://localhost:3000/allfriends/' + id,
+                        {
+                            'since':parseInt(response.data.since)-1}
+                        )
+                    
+                        // this.setState({since:parseInt(response.data.since)+1})
+                                 this.getAllFriends()
+                                 window.location.reload(false);
+                                },error=>{
+                                    console.log(error.error)
+                                })
+                            }
+            
     // addSinceWithId=(id)=>{
     //     console.log('add since for received id: ' + id);
     //     axios.patch('http://localhost:3000/allfriends' + '/' + id)
@@ -106,6 +125,7 @@ class Friend extends React.Component {
                         deleteId={this.deleteFriendWithId}
                         editId={this.editFriendWithId}
                         addId={this.addSinceWithId}
+                        subId={this.subSinceWithId}
                     >
 
                     </FriendDetail>

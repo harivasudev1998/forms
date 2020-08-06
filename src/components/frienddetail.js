@@ -56,9 +56,10 @@ sinceAdd=()=>{
 
     sinceSub=()=>{
 
-        console.log(this.state.since);
-        this.setState({since:this.state.since-1})
-        console.log(this.state.since);
+        console.log("edit friend with id: " + this.props.id);
+    this.props.subId(this.props.id)
+    history.push('/')
+
     } 
     render() { 
       
